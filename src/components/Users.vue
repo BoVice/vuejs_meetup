@@ -6,7 +6,7 @@
       <br />
       <input type="text" v-model="newUser.email" placeholder="Enter email" @input="$emit('updatedEmail', newUser.email)" >
       <br />
-      <input type="submit" value="Submit" >
+      <input type="submit" value="Submit" :disabled="disabled">
     </form>
     <ul>
       <li v-for="user in users">
@@ -29,6 +29,11 @@
         type: Array,
         required: true,
       },
+
+      disabled: {
+        type: Boolean,
+        required: true
+      }
     },
     data() {
       return {

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <users :users="users" @createNewUser="handleNewUser" @deleteCurrentUser="handleDeleteUser" @updatedEmail="handleNewUserEmail" @updatedName="handleNewUserName"> </users>
+    <users :users="users" @createNewUser="handleNewUser" @deleteCurrentUser="handleDeleteUser" @updatedEmail="handleNewUserEmail" @updatedName="handleNewUserName" :disabled="isEnabled"> </users>
 
     <review :userName="userName" :userEmail="userEmail"></review>
   </div>
@@ -42,6 +42,7 @@ export default {
 
         userName: "",
         userEmail: "",
+        disabled: false,
       }
     },
 
@@ -65,6 +66,16 @@ export default {
       this.userEmail = updatedEmail
     }
   },
+
+  computed: {
+    isEnabled: function() {
+      if (this.userName !== "" && this.userEmail != "") {
+        return this.disabled = false
+      }else{
+        return this.disabled = true
+      }
+    }
+  }
 }
 </script>
 
