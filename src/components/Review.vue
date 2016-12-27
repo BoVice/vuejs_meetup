@@ -3,6 +3,8 @@
     <label> Name: {{ this.userName }}</label>
     <br />
     <label> Email: {{ this.userEmail }}</label>
+    <br />
+    <label> Todo: {{ this.todo }}</label>
   </div>
 </template>
 
@@ -18,6 +20,11 @@
       },
 
       userEmail: {
+        type: String,
+        required: true,
+      },
+
+      todo: {
         type: String,
         required: true,
       }

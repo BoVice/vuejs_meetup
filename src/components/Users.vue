@@ -6,6 +6,9 @@
       <br />
       <input type="text" v-model="newUser.email" placeholder="Enter email" @input="$emit('updatedEmail', newUser.email)" >
       <br />
+      <todo @updatedTodo="handleNewUserTodo">
+      </todo>
+      <br />
       <input type="submit" value="Submit" :disabled="disabled">
     </form>
     <ul>
@@ -21,8 +24,13 @@
 
 
 <script>
+import Todo from './todo'
+
   export default {
     name: 'users',
+    components: {
+      Todo
+    },
 
     props: {
       users: {
@@ -32,9 +40,15 @@
 
       disabled: {
         type: Boolean,
+        required: true,
+      },
+
+      todo: {
+        type: String,
         required: true
       }
     },
+
     data() {
       return {
         newUser: {},
@@ -51,6 +65,10 @@
       deleteUser: function(user) {
         this.$emit("deleteCurrentUser", user)
       },
+
+      handleNewUserTodo: function(todo) {
+        this.$emit("createNewTodo", todo)
+      }
     }
   }
 </script>

@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-
-    <users :users="users" @createNewUser="handleNewUser" @deleteCurrentUser="handleDeleteUser" @updatedEmail="handleNewUserEmail" @updatedName="handleNewUserName" :disabled="isEnabled"> </users>
-
-    <review :userName="userName" :userEmail="userEmail"></review>
+    <users :users="users" @createNewUser="handleNewUser" @createNewTodo="handleNewTodo" @deleteCurrentUser="handleDeleteUser" @updatedEmail="handleNewUserEmail" @updatedName="handleNewUserName" :disabled="isEnabled" :todo="todo" > </users>
+    <review :userName="userName" :userEmail="userEmail" :todo="todo"></review>
   </div>
 </template>
 
@@ -15,7 +13,7 @@ export default {
   name: 'app',
   components: {
     Users,
-    Review
+    Review,
   },
 
   data() {
@@ -39,10 +37,10 @@ export default {
             contacted: false
           }
         ],
-
         userName: "",
         userEmail: "",
         disabled: false,
+        todo: "",
       }
     },
 
@@ -64,12 +62,17 @@ export default {
 
     handleNewUserEmail: function(updatedEmail) {
       this.userEmail = updatedEmail
+    },
+
+    handleNewTodo: function(updatedTodo) {
+      this.todo = updatedTodo
     }
+
   },
 
   computed: {
     isEnabled: function() {
-      if (this.userName !== "" && this.userEmail != "") {
+      if (this.userName !== "" && this.userEmail != "" && this.todo != "") {
         return this.disabled = false
       }else{
         return this.disabled = true
